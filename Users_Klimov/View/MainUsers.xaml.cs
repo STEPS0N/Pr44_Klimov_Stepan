@@ -20,9 +20,10 @@ namespace Users_Klimov.View
     /// </summary>
     public partial class MainUsers : Page
     {
-        public MainUsers()
+        public MainUsers(object Context)
         {
             InitializeComponent();
+            DataContext = Context;
         }
     }
 }
