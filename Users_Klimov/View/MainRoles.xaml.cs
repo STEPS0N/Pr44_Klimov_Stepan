@@ -20,9 +20,10 @@ namespace Users_Klimov.View
     /// </summary>
     public partial class MainRoles : Page
     {
-        public MainRoles()
+        public MainRoles(object Context)
         {
             InitializeComponent();
+            DataContext = Context;
         }
     }
 }
