@@ -10,24 +10,24 @@ using Users_Klimov.Models;
 
 namespace Users_Klimov.ViewModels
 {
-    public class VM_Users : Notification
+    public class VM_Roles : Notification
     {
         public AllContext context = new AllContext();
-        public ObservableCollection<Users> Users { get; set; }
-        public VM_Users()
+        public ObservableCollection<Roles> Roles { get; set; }
+        public VM_Roles()
         {
-            Users = new ObservableCollection<Users>();
+            Roles = new ObservableCollection<Roles>();
         }
 
-        public RealyCommand OnAddUser
+        public RealyCommand OnAddRole
         {
             get
             {
                 return new RealyCommand(obj =>
                 {
-                    Users newUser = new Users();
-                    Users.Add(newUser);
-                    context.Users.Add(newUser);
+                    Roles newRole = new Roles();
+                    Roles.Add(newRole);
+                    context.Roles.Add(newRole);
                     context.SaveChanges();
                 });
             }
