@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\ic_role.png" />
     <None Remove="Images\ic_roles.png" />
     <None Remove="Images\ic_user.png" />
     <None Remove="Images\ic_users.png" />
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\ic_role.png" />
     <Resource Include="Images\ic_roles.png" />
     <Resource Include="Images\ic_user.png" />
     <Resource Include="Images\ic_users.png" />
