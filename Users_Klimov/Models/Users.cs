@@ -67,14 +67,31 @@ namespace Users_Klimov.Models
             }
         }
 
-        private string role;
-        public string Role
+        private int roleId;
+        public int RoleId
+        {
+            get { return roleId; }
+            set
+            {
+                roleId = value;
+                OnPropertyChanged("RoleId");
+
+                if (AllRoles != null)
+                {
+                    Role = AllRoles.FirstOrDefault(r => r.Id == value);
+                    OnPropertyChanged("Role");
+                }
+            }
+        }
+
+        private Roles role;
+        public virtual Roles Role
         {
             get { return role; }
             set
             {
                 role = value;
-                OnPropertyChanged("Surname");
+                OnPropertyChanged("Role");
             }
         }
 
@@ -102,18 +119,38 @@ namespace Users_Klimov.Models
         }
 
         [NotMapped]
+        public List<Roles> AllRoles { get; set; }
+
+        [NotMapped]
         public RealyCommand OnEdit
         {
             get
             {
                 return new RealyCommand(obj =>
                 {
-                    IsEnable = !IsEnable;
-
-                    if (!IsEnable)
+                    if (IsEnable)
                     {
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.context.Users.SaveChanges();
+                        try
+                        {
+                            var context = (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.context;
+                            context.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Ошибка сохранения: {ex.Message}");
+                        }
                     }
+                    else
+                    {
+                        var context = (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.context;
+                        AllRoles = context.Roles.ToList();
+                        OnPropertyChanged("AllRoles");
+
+                        OnPropertyChanged("RoleId");
+                        OnPropertyChanged("Role");
+                    }
+
+                    IsEnable = !IsEnable;
                 });
             }
         }
@@ -130,7 +167,7 @@ namespace Users_Klimov.Models
                     {
                         (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.Users.Remove(this);
                         (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.context.Users.Remove(this);
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.context.Users.SaveChanges();
+                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_users.context.SaveChanges();
                     }
                 });
             }

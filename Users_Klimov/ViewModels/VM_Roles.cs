@@ -16,7 +16,7 @@ namespace Users_Klimov.ViewModels
         public ObservableCollection<Roles> Roles { get; set; }
         public VM_Roles()
         {
-            Roles = new ObservableCollection<Roles>();
+            Roles = new ObservableCollection<Roles>(context.Roles.ToList());
         }
 
         public RealyCommand OnAddRole
@@ -26,9 +26,16 @@ namespace Users_Klimov.ViewModels
                 return new RealyCommand(obj =>
                 {
                     Roles newRole = new Roles();
+
+                    newRole.Role = "Новая роль";
+                    newRole.IsEnable = true;
+
                     Roles.Add(newRole);
                     context.Roles.Add(newRole);
                     context.SaveChanges();
+
+                    var vmUsers = (MainWindow.init.DataContext as VM_Pages).vm_users;
+                    vmUsers.RefreshData();
                 });
             }
         }

@@ -76,7 +76,10 @@
                 </Grid.Effect>
                 <Label Content="Роль:" VerticalAlignment="Top" Margin="10,0,10,0"/>
                 <ComboBox
-                    ItemsSource="{Binding Role}"
+                    DisplayMemberPath="Role"
+                    SelectedValuePath="Id"
+                    SelectedValue="{Binding RoleId, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding AllRoles}"
                     IsEnabled="{Binding IsEnable}"
                     VerticalContentAlignment="Center"
                     Margin="10,25,10,0"

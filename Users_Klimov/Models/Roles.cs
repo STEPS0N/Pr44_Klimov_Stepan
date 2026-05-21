@@ -32,6 +32,8 @@ namespace Users_Klimov.Models
             }
         }
 
+        public virtual ICollection<Users> Users { get; set; }
+
         [NotMapped]
         private bool isEnable;
         public bool IsEnable
@@ -66,7 +68,7 @@ namespace Users_Klimov.Models
 
                     if (!IsEnable)
                     {
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_roles.context.Roles.SaveChanges();
+                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_roles.context.SaveChanges();
                     }
                 });
             }
@@ -84,7 +86,7 @@ namespace Users_Klimov.Models
                     {
                         (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_roles.Roles.Remove(this);
                         (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_roles.context.Roles.Remove(this);
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_roles.context.Roles.SaveChanges();
+                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_roles.context.SaveChanges();
                     }
                 });
             }

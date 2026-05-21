@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Users_Klimov.ViewModels;
 
 namespace Users_Klimov
 {
@@ -20,16 +21,21 @@ namespace Users_Klimov
         public MainWindow()
         {
             InitializeComponent();
+            init = this;
+            DataContext = new VM_Pages();
         }
 
         private void ToRoles(object sender, MouseButtonEventArgs e)
         {
-            frame.Navigate(new View.MainRoles());
+            var vm = DataContext as VM_Pages;
+            frame.Navigate(new View.MainRoles(vm.vm_roles));
         }
 
         private void ToUsers(object sender, MouseButtonEventArgs e)
         {
-            frame.Navigate(new View.MainUsers());
+            var vm = DataContext as VM_Pages;
+            vm.vm_users = new VM_Users();
+            frame.Navigate(new View.MainUsers(vm.vm_users));
         }
     }
 }

@@ -9,13 +9,14 @@ namespace Users_Klimov.ViewModels
 {
     public class VM_Pages : Notification
     {
-        public VM_Users vm_users = new VM_Users();
-        public VM_Roles vm_roles = new VM_Roles();
+        public VM_Users vm_users { get; set; }
+        public VM_Roles vm_roles { get; set; }
 
         public VM_Pages()
         {
+            vm_users = new VM_Users();
+            vm_roles = new VM_Roles();
             MainWindow.init.frame.Navigate(new View.MainUsers(vm_users));
-            MainWindow.init.frame.Navigate(new View.MainRoles(vm_roles));
         }
     }
 }
